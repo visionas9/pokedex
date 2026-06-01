@@ -17,6 +17,10 @@ export default function Index() {
     getPokemon();
   }, []);
 
+  useEffect(() => {
+    console.log(pokemon);
+  }, [pokemon]);
+
   return (
     <View style={styles.container}>
       <Text>Pokedex</Text>
