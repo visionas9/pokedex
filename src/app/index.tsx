@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 
 export default function Index() {
-  const [pokemon, setPokemon] = useState(null);
+  const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
     const getPokemon = async () => {
