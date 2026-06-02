@@ -1,15 +1,20 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
 
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
 export default function Index() {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemon, setPokemon] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     const getPokemon = async () => {
       try {
-        const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=20");
+        const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=10");
         const data = await res.json();
-        setPokemon(data);
+        setPokemon(data.results);
       } catch (err) {
         console.log(err);
       }
@@ -22,9 +27,13 @@ export default function Index() {
   }, [pokemon]);
 
   return (
-    <View style={styles.container}>
-      <Text>Pokedex</Text>
-    </View>
+    <ScrollView>
+      {pokemon.map((p) => (
+        <View key={p.name}>
+          <Text>{p.name}</Text>
+        </View>
+      ))}
+    </ScrollView>
   );
 }
 
