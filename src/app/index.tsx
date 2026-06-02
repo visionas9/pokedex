@@ -4,11 +4,21 @@ import { useState, useEffect } from "react";
 interface Pokemon {
   name: string;
   image: string;
+  imageBack: string;
+  types: PokemonType[];
+}
+
+interface PokemonType {
+  type: {
+    name: string;
+    url: string;
+  };
 }
 
 export default function Index() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
 
+  console.log(JSON.stringify(pokemon[0], null, 2));
   useEffect(() => {
     const getPokemon = async () => {
       try {
@@ -22,10 +32,11 @@ export default function Index() {
             return {
               name: pokemon.name,
               image: details.sprites.front_default,
+              imageBack: details.sprites.back_default,
+              types: details.types,
             };
           }),
         );
-        console.log(detailedPokemons);
 
         setPokemon(detailedPokemons);
       } catch (err) {
@@ -40,20 +51,28 @@ export default function Index() {
       {pokemon.map((p) => (
         <View key={p.name}>
           <Text>{p.name}</Text>
-          <Image
-            source={{ uri: p.image }}
-            style={{ width: 100, height: 100 }}
-          />
+          <Text>{p.types[0].type.name}</Text>
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <Image
+              source={{ uri: p.image }}
+              style={{ width: 100, height: 100 }}
+            />
+            <Image
+              source={{ uri: p.imageBack }}
+              style={{ width: 100, height: 100 }}
+            />
+          </View>
         </View>
       ))}
     </ScrollView>
   );
 }
 
+// styling variables
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  name: {},
 });
