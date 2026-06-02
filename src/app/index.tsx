@@ -7,6 +7,7 @@ import {
   Pressable,
 } from "react-native";
 import { useState, useEffect } from "react";
+import { router } from "expo-router";
 
 interface Pokemon {
   name: string;
@@ -82,7 +83,11 @@ export default function Index() {
       }}
     >
       {pokemon.map((p) => (
-        <Pressable key={p.name} onPress={() => navigation.navigate("/details")}>
+        <Pressable
+          onPress={() =>
+            router.navigate({ pathname: "/details", params: { name: p.name } })
+          }
+        >
           <View
             style={{
               // @ts-ignore
