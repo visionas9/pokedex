@@ -82,7 +82,7 @@ export default function Index() {
       }}
     >
       {pokemon.map((p) => (
-        <Pressable key={p.name}>
+        <Pressable key={p.name} onPress={() => navigation.navigate("/details")}>
           <View
             style={{
               // @ts-ignore
