@@ -14,6 +14,19 @@ export default function Index() {
       try {
         const res = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=10");
         const data = await res.json();
+
+        const detailedPokemons = await Promise.all(
+          data.results.map(async (pokemon: Pokemon) => {
+            const res = await fetch(pokemon.url);
+            const details = await res.json();
+            return {
+              name: pokemon.name,
+              image: details.sprites.front_default,
+            };
+          }),
+        );
+        console.log(detailedPokemons);
+
         setPokemon(data.results);
       } catch (err) {
         console.log(err);
@@ -21,10 +34,6 @@ export default function Index() {
     };
     getPokemon();
   }, []);
-
-  useEffect(() => {
-    console.log(pokemon);
-  }, [pokemon]);
 
   return (
     <ScrollView>
