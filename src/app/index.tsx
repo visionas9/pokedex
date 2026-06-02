@@ -50,7 +50,7 @@ export default function Index() {
     <ScrollView>
       {pokemon.map((p) => (
         <View key={p.name}>
-          <Text>{p.name}</Text>
+          <Text style={styles.name}>{p.name}</Text>
           <Text>{p.types[0].type.name}</Text>
           <View
             style={{
@@ -74,5 +74,8 @@ export default function Index() {
 
 // styling variables
 const styles = StyleSheet.create({
-  name: {},
+  name: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
 });
