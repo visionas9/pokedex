@@ -1,4 +1,11 @@
-import { Image, Text, View, StyleSheet, ScrollView } from "react-native";
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+} from "react-native";
 import { useState, useEffect } from "react";
 
 interface Pokemon {
@@ -75,30 +82,35 @@ export default function Index() {
       }}
     >
       {pokemon.map((p) => (
-        <View
-          key={p.name}
-          style={{
-            // @ts-ignore
-            backgroundColor: colorsByType[p.types[0].type.name],
-          }}
-        >
-          <Text style={styles.name}>{p.name}</Text>
-          <Text style={styles.type}>{p.types[0].type.name}</Text>
+        <Pressable key={p.name}>
           <View
             style={{
-              flexDirection: "row",
+              // @ts-ignore
+              backgroundColor: colorsByType[p.types[0].type.name] + 50,
+              padding: 20,
+              borderRadius: 20,
             }}
           >
-            <Image
-              source={{ uri: p.image }}
-              style={{ width: 100, height: 100 }}
-            />
-            <Image
-              source={{ uri: p.imageBack }}
-              style={{ width: 100, height: 100 }}
-            />
+            <Text style={styles.name}>{p.name}</Text>
+            <Text style={styles.type}>{p.types[0].type.name}</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                source={{ uri: p.image }}
+                style={{ width: 100, height: 100 }}
+              />
+              <Image
+                source={{ uri: p.imageBack }}
+                style={{ width: 100, height: 100 }}
+              />
+            </View>
           </View>
-        </View>
+        </Pressable>
       ))}
     </ScrollView>
   );
@@ -109,10 +121,12 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 28,
     fontWeight: "bold",
+    textAlign: "center",
   },
   type: {
     fontSize: 20,
     fontWeight: "bold",
     color: "gray",
+    textAlign: "center",
   },
 });
