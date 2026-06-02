@@ -102,11 +102,11 @@ export default function Index() {
             >
               <Image
                 source={{ uri: p.image }}
-                style={{ width: 100, height: 100 }}
+                style={{ width: 200, height: 200 }}
               />
               <Image
                 source={{ uri: p.imageBack }}
-                style={{ width: 100, height: 100 }}
+                style={{ width: 200, height: 200 }}
               />
             </View>
           </View>
