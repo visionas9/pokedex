@@ -1,6 +1,9 @@
+import { useLocalSearchParams } from "expo-router";
 import { Image, Text, View, StyleSheet, ScrollView } from "react-native";
 
 export default function Details() {
+  const params = useLocalSearchParams();
+
   return (
     <ScrollView
       contentContainerStyle={{

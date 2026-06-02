@@ -47,7 +47,6 @@ const colorsByType: Record<string, string> = {
 export default function Index() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
 
-  console.log(JSON.stringify(pokemon[0], null, 2));
   useEffect(() => {
     const getPokemon = async () => {
       try {
@@ -87,6 +86,7 @@ export default function Index() {
           onPress={() =>
             router.navigate({ pathname: "/details", params: { name: p.name } })
           }
+          key={p.name}
         >
           <View
             style={{
